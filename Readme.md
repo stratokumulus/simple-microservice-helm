@@ -20,14 +20,15 @@ This creates an empty chart. If you have the linux `tree` command, look into it 
     ├── Chart.yaml
     ├── charts
     ├── templates
+    │   ├── NOTES.txt
     │   ├── _helpers.tpl
-    │   ├── micro-configmap.yaml
-    │   ├── micro-deployment.yaml
-    │   ├── micro-svc.yaml
-    │   ├── redis-deployment.yaml
-    │   ├── redis-ns.yaml
-    │   ├── redis-svc.yaml
+    │   ├── deployment.yaml
+    │   ├── hpa.yaml
+    │   ├── ingress.yaml
+    │   ├── service.yaml
+    │   ├── serviceaccount.yaml
     │   └── tests
+    │       └── test-connection.yaml
     └── values.yaml
 ```
 
@@ -40,7 +41,28 @@ To start easy, the important files and directories are : `Charts.yaml`, `values.
 
 - Finally, we'll edit the file Charts.yaml to update the meta data. 
 
-And that should be it. Run the command 
+And that should be it. 
+
+The output of `tree` should now look like this : 
+
+```
+└── simple-micro
+    ├── Chart.yaml
+    ├── charts
+    ├── templates
+    │   ├── _helpers.tpl
+    │   ├── micro-configmap.yaml
+    │   ├── micro-deployment.yaml
+    │   ├── micro-svc.yaml
+    │   ├── redis-deployment.yaml
+    │   ├── redis-ns.yaml
+    │   ├── redis-svc.yaml
+    │   └── tests
+    └── values.yaml
+```
+
+
+Run the command 
 
 ```
 helm install micro-serv-by-helm simple-micro/
