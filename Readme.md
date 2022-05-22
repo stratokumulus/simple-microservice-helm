@@ -6,19 +6,39 @@ As usual in my repos : this for practice and education. Don't try this at work, 
 
 I'll use the simple-microservice deployment that sits somewhere in my repos. The assumption is that all the YAML files in that repo can be deployed, and provide a working app. 
 
-Start by creatin aan empty chart : 
+Start by creatinh an empty chart : 
 
 ```
 helm create simple-micro
 ```
 
-This creates an empty chart. If you have the linux `tree` command, look into it and check the structure. Go to the newly created `simple-micro` directory : `cd simple-micro`
+This creates an empty chart. If you have the linux `tree` command, look into it and check the structure. 
 
-I'll be looking into 2 files, `Charts.yaml`, `values.yaml`, and the `templates/` directory. 
+```
+.
+└── simple-micro
+    ├── Chart.yaml
+    ├── charts
+    ├── templates
+    │   ├── _helpers.tpl
+    │   ├── micro-configmap.yaml
+    │   ├── micro-deployment.yaml
+    │   ├── micro-svc.yaml
+    │   ├── redis-deployment.yaml
+    │   ├── redis-ns.yaml
+    │   ├── redis-svc.yaml
+    │   └── tests
+    └── values.yaml
+```
 
-First, let's empty the file values.yaml from all its content. Next, remove all files and subdirectories from under templates/ (except for the helper file). Then, copy all the YAML files from the simple-microservice repo under templates.
+To start easy, the important files and directories are : `Charts.yaml`, `values.yaml`, and the `templates/`. Remember, we have a working deployment, and we want to make our life easier, and deploy all files at once without too much hassle for once. 
 
-Edit the file Charts.yaml to update the meta data. Get back to the previous directory : `cd ..`
+- We will thus start by removing all files and subdirectories in the templates directory (except the file  `_helpers.tpl`). 
+- Then, we'll edit the file `values.yaml`, delete all its content, and save it. 
+
+- Next we'll copy all the YAML files from the simple-microservice repo under templates.
+
+- Finally, we'll edit the file Charts.yaml to update the meta data. 
 
 And that should be it. Run the command 
 
@@ -32,7 +52,14 @@ See ? Told you it was easy.
 
 ## Can we make this more complex ?
 
-Of course. Let's edit the files values.yaml. It's a YAML file, and the structure is like this :
+Yes we can ! 
+
+What we did here is just bundled all our files together, and just turned them into a single entity to be deployed at once. 
+
+But we can add a bit of flexibility, by removing hardcoded stuff from the original YAML file. 
+
+So let's edit the files values.yaml. It's a YAML file, and a basic structure looks like this (I said "basic". We can make it a lot more complicated, but this isn't a YAML course ! ):
+
 ```
 itemA:
   subItemA1: value1
