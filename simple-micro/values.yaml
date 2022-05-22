@@ -1,0 +1,4 @@
+micro:      # configurable values for the microservice pod
+  image: stratokumulus/simple-microservice
+  tag: 18
+

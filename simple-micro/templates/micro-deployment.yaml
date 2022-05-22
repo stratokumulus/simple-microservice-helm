@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: micro-deploy
+  #namespace: owner1
+  labels: 
+    app: micro
+spec:
+  replicas: 1
+  selector:
+    matchLabels: 
+      app: micro
+  template: 
+    metadata:
+      name: micro-deploy
+      labels:
+        app: micro
+    spec: 
+      containers:
+        - name: micro-service
+          image: {{ .Values.micro.image }}:{{ .Values.micro.tag }} 
+          ports:
+            - containerPort: 9876
+          envFrom:
+          - configMapRef:
+              name: simple-map
+      volumes:
+        - name: micro-secret
+          secret:
+            secretName: DB_PASSWD
+
+
