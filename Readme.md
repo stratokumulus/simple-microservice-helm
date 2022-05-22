@@ -75,10 +75,10 @@ These values can then be used in the YAML files you placed in the templates dire
 For Helm's templating engine to work, the translation will be a dotted one : 
 
 ``` 
-value1 = .Values.itemA.subItemA1
-value2 = .Values.itemA.subItemA2
-value3 = .Values.itemB.subItemB1
-value4 = .Values.itemB.subItemB2
+value1 = {{ .Values.itemA.subItemA1 }}
+value2 = {{ .Values.itemA.subItemA2 }}
+value3 = {{ .Values.itemB.subItemB1 }}
+value4 = {{ .Values.itemB.subItemB2 }}
 ```
 
 Let's give a clearer example maybe. Let's say you don't want to hardcode the value of the image used in the micro-service deployment, but rather make it a value that can easily be updated. In the file `values.yaml`, create the following : 
@@ -103,7 +103,7 @@ to
    spec: 
       containers:
         - name: micro-service
-          image: {{ .Values.micro.image }}:{{ .Values.micro.tag }} 
+          image: {{ .Values.micro-serv.image }}:{{ .Values.micro-serv.tag }} 
 ```
 
 This makes changing images, version, ... a lot easier (especially if you reuse the variables at multiple places). 
